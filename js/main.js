@@ -185,5 +185,31 @@ let app = new Vue({
             }
             this.length()
         },
+
+        // чтобы в первой колонки, если половина сделана то переходит на некст столбец
+        changeColumn1(id) {
+            if (this.column1.notes[id].completedNum > 50 && this.column2.notes.length <= 5) {
+                if (this.column2.notes.length === 5) {
+                    this.about.signal = true;
+                    this.about.bufColumn.push(this.column1.notes[id])
+                    this.about.id = id
+                }
+
+                else if(this.about.bufColumn[0] && this.column2.notes.length === 4){
+                    this.column2.notes.push(this.about.bufColumn[0])
+                    this.about.bufColumn.splice(0, 1)
+                    this.column1.notes.splice(this.about.id, 1)
+                }
+
+                else {
+                    this.column2.notes.push(this.column1.notes[id])
+                    this.column1.notes.splice(id, 1)
+                }
+            }
+            this.length()
+            localStorage.todo = JSON.stringify(this.column1.notes);
+            localStorage.todo2 = JSON.stringify(this.column2.notes);
+            localStorage.about = JSON.stringify(this.about)
+        },
     },
 })
