@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Note</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vue.js"></script>
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <h1>Заметки</h1>
+    <div id="creating_record">
+
+        <form v-on:submit.prevent="creatingRecord">
+            <input class="listed" v-model="note" :disabled="column1.notes.length === 3" placeholder="Название заметки">
+            <input class="listed" v-model="recordOne" :disabled="column1.notes.length === 3" placeholder="заметка 1">
+            <input class="listed" v-model="recordTwo" :disabled="column1.notes.length === 3" placeholder="заметка 2">
+            <input class="listed" v-model="recordThree" :disabled="column1.notes.length === 3" placeholder="заметка 3">
+            <input class="listed btn" type="submit" value="Добавить" :class="{disabled: column1.notes.length === 3}">
+        </form>
+    </div>
+    <br>
+
+    <div class="container">
+        <div class="column column1" :class="{disabled: about.signal}">
+
+            <note v-on:del_note="delete1(index)" v-on:column1_move="changeColumn1(index)" :notes="column1.notes" :id_column="column1.idColumn" :about="about"
+                  :record_data="record_data" v-for="(record_data, index) in column1.notes" :key="index" class="list">
+            </note>
+        </div>
+
+        <div class="column column2">
+
+            <note v-on:del_note="delete2(index)" v-on:column2_move="changeColumn2(index)" :id_column="column2.idColumn" :about="about"
+                  v-on:column2_move_left="changeColumn2(index)" :notes="column2.notes" :record_data="record_data"
+                  v-for="(record_data, index) in column2.notes" :key="index" class="list">
+            </note>
+        </div>
+
+        <div class="column column3">
+
+            <note v-on:del_note="delete3(index)" :notes="column3.notes" :record_data="record_data" :id_column="column3.idColumn" :about="about"
+                  v-for="(record_data, index) in column3.notes" :key="index" class="list">
+            </note>
+        </div>
+    </div>
+</div>
+</body>
+</html>
