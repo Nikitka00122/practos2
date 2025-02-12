@@ -161,6 +161,21 @@ let app = new Vue({
     computed: {
 
     },
+    // это отвечает за сохранение заявок
+    mounted() {
+        if (localStorage.todo) {
+            this.column1.notes = JSON.parse(localStorage.todo)
+        }
+        if (localStorage.todo2) {
+            this.column2.notes = JSON.parse(localStorage.todo2)
+        }
+        if (localStorage.todo3) {
+            this.column3.notes = JSON.parse(localStorage.todo3)
+        }
+        if (localStorage.about){
+            this.about = JSON.parse(localStorage.about)
+        }
+    },
 
     methods: {
         // создание самой заявки, нельзя больше трех заявок создавать в первую колонку
