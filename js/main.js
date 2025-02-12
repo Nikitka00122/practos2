@@ -259,6 +259,11 @@ let app = new Vue({
             this.column3.notes.splice(id, 1);
             localStorage.todo3 = JSON.stringify(this.column3.notes);
         },
-
+        // вывод даты и времени в третьей колонке
+        times(id) {
+            let Data = new Date();
+            this.column2.notes[id].time = Data.getHours() + ':' + Data.getMinutes();
+            this.column2.notes[id].date = Data.getDate() + ':' + Data.getMonth() + ':' + Data.getFullYear();
+        },
     },
 })
