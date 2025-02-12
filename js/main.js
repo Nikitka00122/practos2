@@ -92,6 +92,13 @@ Vue.component('note', {
             this.save();
         },
 
+        // сохранение блоков, при перезагрузке
+        save() {
+            if (this.idColumn === 1 && this.record_data.completedNum <= 50) localStorage.todo = JSON.stringify(this.notes);
+            else if (this.idColumn === 3 && this.record_data.completedNum === 100) localStorage.todo3 = JSON.stringify(this.notes);
+            else localStorage.todo2 = JSON.stringify(this.notes);
+        }
+
     },
 
     template: `
