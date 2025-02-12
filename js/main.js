@@ -225,5 +225,17 @@ let app = new Vue({
             localStorage.todo3 = JSON.stringify(this.column3.notes);
             localStorage.about = JSON.stringify(this.about)
         },
+
+        // если меньше 50% остается в первой колонке
+        changeColumn2Left(id) {
+            if (this.column2.notes[id].completedNum <= 50) {
+                this.column1.notes.unshift(this.column2.notes[id]);
+                this.column2.notes.splice(id, 1);
+                this.changeColumn1(this.about.id)
+            }
+            this.length()
+            localStorage.todo = JSON.stringify(this.column1.notes);
+            localStorage.todo2 = JSON.stringify(this.column2.notes);
+        },
     },
 })
