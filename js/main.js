@@ -287,5 +287,11 @@ let app = new Vue({
             this.column2.notes[id].time = Data.getHours() + ':' + Data.getMinutes();
             this.column2.notes[id].date = Data.getDate() + ':' + Data.getMonth() + ':' + Data.getFullYear();
         },
+
+        // для того, чтобы смотреть количество выполненых
+        length(){
+            this.about.lengthColumn1 = this.column1.notes.length;
+            localStorage.about = JSON.stringify(this.about)
+        }
     },
 })
