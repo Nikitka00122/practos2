@@ -211,5 +211,19 @@ let app = new Vue({
             localStorage.todo2 = JSON.stringify(this.column2.notes);
             localStorage.about = JSON.stringify(this.about)
         },
+
+        // если выполнено 100% то переходит в третью колонку
+        changeColumn2(id) {
+            if (this.column2.notes[id].completedNum === 100) {
+                this.times(id);
+                this.column3.notes.push(this.column2.notes[id]);
+                this.column2.notes.splice(id, 1);
+                this.changeColumn1(this.about.id)
+                this.about.signal = false
+            }
+            localStorage.todo2 = JSON.stringify(this.column2.notes);
+            localStorage.todo3 = JSON.stringify(this.column3.notes);
+            localStorage.about = JSON.stringify(this.about)
+        },
     },
 })
