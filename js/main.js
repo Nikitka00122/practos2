@@ -237,5 +237,28 @@ let app = new Vue({
             localStorage.todo = JSON.stringify(this.column1.notes);
             localStorage.todo2 = JSON.stringify(this.column2.notes);
         },
+
+        // удаление из первой
+        delete1(id) {
+            this.column1.notes.splice(id, 1);
+            this.length()
+            localStorage.todo = JSON.stringify(this.column1.notes);
+        },
+
+        // удаление из второй
+        delete2(id) {
+            this.column2.notes.splice(id, 1);
+            this.about.signal = false
+            this.changeColumn1(this.about.id)
+            localStorage.about = JSON.stringify(this.about)
+            localStorage.todo2 = JSON.stringify(this.column2.notes);
+        },
+
+        // удаление из третьей
+        delete3(id) {
+            this.column3.notes.splice(id, 1);
+            localStorage.todo3 = JSON.stringify(this.column3.notes);
+        },
+
     },
 })
